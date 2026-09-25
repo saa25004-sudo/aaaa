@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>モンスター＆ダンジョン・クエスト</title>
+    <!-- Favicon (Fixes 404) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐉</text></svg>">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Yuji+Mai&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -66,12 +66,12 @@
                 <div id="userInfo" class="hidden flex items-center space-x-3 bg-slate-800/80 px-3 py-1.5 rounded-full border border-slate-700">
                     <img id="userAvatar" src="" class="w-7 h-7 rounded-full border border-amber-400" alt="Avatar">
                     <span id="userName" class="text-xs font-semibold text-slate-200 max-w-[100px] truncate">---</span>
-                    <button id="logoutBtn" title="ログアウト" class="text-slate-400 hover:text-red-400 text-xs pl-1">
-                        <i class="fa-solid fa-right-from-bracket"></i>
+                    <button id="logoutBtn" title="ログアウト" class="text-slate-400 hover:text-red-400 text-xs pl-1 flex items-center justify-center">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                     </button>
                 </div>
                 <button id="loginBtn" class="flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold px-4 py-2 rounded-full border border-slate-600 transition shadow-sm active:scale-95">
-                    <i class="fa-brands fa-google text-red-400"></i>
+                    <svg class="w-4 h-4 text-red-400 fill-current" viewBox="0 0 24 24"><path d="M12.24 10.285V13.4h6.887C18.2 16.14 15.645 18 12.24 18c-3.307 0-6-2.693-6-6s2.693-6 6-6c1.47 0 2.812.533 3.856 1.413l2.355-2.355C16.96 3.65 14.73 3 12.24 3 7.27 3 3 7.27 3 12.24s4.27 9.24 9.24 9.24c5.313 0 8.835-3.738 8.835-8.99 0-.612-.066-1.163-.162-1.705H12.24z"/></svg>
                     <span>Googleでログイン</span>
                 </button>
             </div>
@@ -84,7 +84,7 @@
         <!-- Banner Alert for Unauthenticated Users -->
         <div id="guestWarning" class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-3 flex items-center justify-between text-xs text-amber-300">
             <div class="flex items-center space-x-2">
-                <i class="fa-solid fa-triangle-exclamation text-base"></i>
+                <span class="text-base">⚠️</span>
                 <span>Googleログインするとクラウド保存 & オンラインランキングに参加できます！</span>
             </div>
         </div>
@@ -92,13 +92,13 @@
         <!-- Tab Navigation -->
         <div class="flex bg-slate-900 p-1 rounded-xl border border-slate-800 text-sm font-semibold">
             <button id="tabBattle" class="flex-1 py-2.5 rounded-lg text-amber-400 bg-slate-800 transition flex justify-center items-center gap-2 shadow">
-                <i class="fa-solid fa-swords"></i> ダンジョン
+                <span>⚔️</span> ダンジョン
             </button>
             <button id="tabUpgrade" class="flex-1 py-2.5 rounded-lg text-slate-400 hover:text-slate-200 transition flex justify-center items-center gap-2">
-                <i class="fa-solid fa-shield-halved"></i> 強化・装備
+                <span>🛡️</span> 強化・装備
             </button>
             <button id="tabRanking" class="flex-1 py-2.5 rounded-lg text-slate-400 hover:text-slate-200 transition flex justify-center items-center gap-2">
-                <i class="fa-solid fa-trophy"></i> ランキング
+                <span>🏆</span> ランキング
             </button>
         </div>
 
@@ -112,7 +112,7 @@
                 </div>
                 <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl">
                     <span class="text-xs text-slate-400">所持ゴールド</span>
-                    <p id="goldDisplay" class="text-xl font-black text-yellow-400 pixel-font mt-1"><i class="fa-solid fa-coins text-sm"></i> 0</p>
+                    <p id="goldDisplay" class="text-xl font-black text-yellow-400 pixel-font mt-1">🪙 0</p>
                 </div>
                 <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl">
                     <span class="text-xs text-slate-400">プレイヤーLV</span>
@@ -127,7 +127,7 @@
 
                 <!-- Boss Warning Badge -->
                 <div id="bossBadge" class="hidden px-3 py-1 bg-red-600/30 border border-red-500 text-red-400 text-xs font-bold rounded-full animate-pulse">
-                    <i class="fa-solid fa-skull"></i> BOSS BATTLE
+                    💀 BOSS BATTLE
                 </div>
 
                 <!-- Monster Container -->
@@ -146,8 +146,8 @@
                 </div>
 
                 <!-- Click Attack Hint -->
-                <p class="text-xs text-slate-500 animate-bounce">
-                    <i class="fa-solid fa-hand-pointer"></i> モンスターをタップして攻撃！
+                <p class="text-xs text-slate-500 animate-bounce flex items-center gap-1">
+                    <span>👆</span> モンスターをタップして攻撃！
                 </p>
 
                 <!-- Floating Damage Container -->
@@ -157,11 +157,11 @@
             <!-- Skill & Auto-Attack Actions -->
             <div class="grid grid-cols-2 gap-3">
                 <button id="skillBtn" class="bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-extrabold p-4 rounded-xl shadow-lg border border-red-400/30 active:scale-95 transition disabled:opacity-50 flex items-center justify-center space-x-2">
-                    <i class="fa-solid fa-fire text-xl"></i>
+                    <span class="text-xl">🔥</span>
                     <span>必殺技: ギガスラッシュ</span>
                 </button>
                 <button id="restBtn" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold p-4 rounded-xl shadow-lg border border-emerald-400/30 active:scale-95 transition flex items-center justify-center space-x-2">
-                    <i class="fa-solid fa-heart-pulse text-xl"></i>
+                    <span class="text-xl">🧪</span>
                     <span>体力回復 (ポーション)</span>
                 </button>
             </div>
@@ -171,7 +171,7 @@
         <section id="secUpgrade" class="space-y-4 hidden">
             <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
                 <h2 class="text-md font-bold text-amber-400 mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-dumbbell"></i> ステータス強化
+                    <span>💪</span> ステータス強化
                 </h2>
                 <div class="space-y-3">
                     <div class="flex items-center justify-between p-3 bg-slate-800/60 rounded-xl border border-slate-700/50">
@@ -209,7 +209,7 @@
             <!-- Weapon Collection Shop -->
             <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
                 <h2 class="text-md font-bold text-amber-400 mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> 装備・ペットショップ
+                    <span>✨</span> 装備・ペットショップ
                 </h2>
                 <div class="grid grid-cols-2 gap-3" id="shopGrid">
                     <!-- Dynamic shop items rendered via JS -->
@@ -223,19 +223,19 @@
                 <div class="flex justify-between items-center mb-4">
                     <div>
                         <h2 class="text-md font-bold text-amber-400 flex items-center gap-2">
-                            <i class="fa-solid fa-trophy text-yellow-500"></i> オンライン世界ランキング
+                            <span>🏆</span> オンライン世界ランキング
                         </h2>
                         <p class="text-xs text-slate-400">最高到達ステージのプレイヤー一覧 (Firestore連携)</p>
                     </div>
-                    <button id="refreshRankBtn" class="text-xs bg-slate-800 hover:bg-slate-700 p-2 rounded-lg border border-slate-700">
-                        <i class="fa-solid fa-rotate-right"></i> 更新
+                    <button id="refreshRankBtn" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-700 flex items-center gap-1">
+                        🔄 <span>更新</span>
                     </button>
                 </div>
 
                 <div class="space-y-2" id="rankingList">
                     <div class="text-center py-8 text-slate-500 text-sm">
-                        <i class="fa-solid fa-spinner animate-spin text-2xl mb-2 block"></i>
-                        ランキングを読み込み中...
+                        <div class="inline-block animate-spin text-2xl mb-2">⏳</div>
+                        <p>ランキングを読み込み中...</p>
                     </div>
                 </div>
             </div>
@@ -248,9 +248,34 @@
         <p>Monsters & Dungeons RPG © Powered by Firebase & GitHub Pages</p>
     </footer>
 
+    <!-- OAuth Domain Error Modal -->
+    <div id="domainErrorModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-red-500/50 rounded-2xl p-6 max-w-md w-full shadow-2xl text-left">
+            <div class="flex items-center space-x-3 text-red-400 mb-3">
+                <span class="text-2xl">⚠️</span>
+                <h3 class="text-lg font-bold">Firebase承認済みドメインの設定が必要です</h3>
+            </div>
+            <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+                GitHub Pagesのドメイン (<code id="currentDomainText" class="bg-slate-800 text-amber-400 px-1.5 py-0.5 rounded border border-slate-700">saa25004-sudo.github.io</code>) がFirebaseの設定に登録されていないため、Googleログインが失敗しました。
+            </p>
+            <div class="bg-slate-800 p-3 rounded-xl text-xs space-y-2 border border-slate-700 text-slate-300 mb-5">
+                <p class="font-bold text-amber-400">【追加手順 (1分程度)】</p>
+                <ol class="list-decimal list-inside space-y-1 text-[11px]">
+                    <li><a href="https://console.firebase.google.com/" target="_blank" class="text-blue-400 underline">Firebase Console</a> にアクセス</li>
+                    <li>プロジェクト <code class="text-amber-300">aaaa-a6b83</code> を開く</li>
+                    <li>左側の <b>Authentication</b> ＞ <b>設定</b> ＞ <b>承認済みドメイン</b> タブ</li>
+                    <li>「<b>ドメインの追加</b>」をクリックし、<br><span id="modalDomainCopy" class="font-mono text-emerald-400 font-bold select-all bg-slate-900 px-1 py-0.5 rounded">saa25004-sudo.github.io</span> を追加</li>
+                </ol>
+            </div>
+            <button id="closeModalBtn" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 rounded-xl border border-slate-600 transition text-xs">
+                閉じる
+            </button>
+        </div>
+    </div>
+
     <!-- Custom Notification Toast -->
     <div id="toast" class="fixed bottom-5 right-5 bg-amber-500 text-slate-950 font-bold px-4 py-3 rounded-xl shadow-2xl transition transform translate-y-20 opacity-0 pointer-events-none flex items-center space-x-2 z-50">
-        <i class="fa-solid fa-bell"></i>
+        <span>🔔</span>
         <span id="toastMsg">通知メッセージ</span>
     </div>
 
@@ -336,8 +361,19 @@
                 showToast(`ようこそ、${result.user.displayName}さん！`);
             } catch (error) {
                 console.error("Login failed:", error);
-                showToast("ログインに失敗しました");
+                if (error.code === 'auth/unauthorized-domain' || error.message.includes('unauthorized-domain')) {
+                    const domain = window.location.hostname;
+                    document.getElementById('currentDomainText').textContent = domain;
+                    document.getElementById('modalDomainCopy').textContent = domain;
+                    document.getElementById('domainErrorModal').classList.remove('hidden');
+                } else {
+                    showToast("ログインに失敗しました: " + (error.message || ''));
+                }
             }
+        });
+
+        document.getElementById('closeModalBtn').addEventListener('click', () => {
+            document.getElementById('domainErrorModal').classList.add('hidden');
         });
 
         logoutBtn.addEventListener('click', async () => {
@@ -633,7 +669,7 @@
         // ==========================================
         function updateUI() {
             document.getElementById('stageNum').textContent = `STAGE ${player.stage}`;
-            document.getElementById('goldDisplay').innerHTML = `<i class="fa-solid fa-coins text-sm"></i> ${player.gold}`;
+            document.getElementById('goldDisplay').innerHTML = `🪙 ${player.gold}`;
             document.getElementById('playerLvDisplay').textContent = `LV ${player.level}`;
 
             // Monster
