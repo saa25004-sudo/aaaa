@@ -4,12 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>モンスター＆ダンジョン・クエスト</title>
-    <!-- Favicon (Fixes 404) -->
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐉</text></svg>">
+    
+    <!-- Mute Tailwind Play CDN production warning in browser console -->
+    <script>
+        (function() {
+            const originalWarn = console.warn;
+            console.warn = function(...args) {
+                if (typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
+                originalWarn.apply(console, args);
+            };
+        })();
+    </script>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -43,7 +56,6 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-slate-950 text-slate-100 overflow-x-hidden">
 
-    <!-- Header / User Info Bar -->
     <header class="bg-slate-900/80 backdrop-blur border-b border-slate-800 sticky top-0 z-50 px-4 py-3">
         <div class="max-w-4xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-3">
@@ -78,7 +90,6 @@
     <!-- Main Container -->
     <main class="max-w-4xl mx-auto w-full p-4 flex-1 flex flex-col gap-4">
 
-        <!-- Banner Alert for Unauthenticated Users -->
         <div id="guestWarning" class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-3 flex items-center justify-between text-xs text-amber-300">
             <div class="flex items-center space-x-2">
                 <span class="text-base">⚠️</span>
@@ -99,7 +110,6 @@
             </button>
         </div>
 
-        <!-- SECTION 1: BATTLE FIELD -->
         <section id="secBattle" class="space-y-4">
             <!-- Stage Status & Gold Indicator -->
             <div class="grid grid-cols-3 gap-3 text-center">
@@ -119,7 +129,6 @@
 
             <!-- Battle View Canvas Container -->
             <div id="battleArena" class="relative bg-gradient-to-b from-slate-900 via-slate-900 to-indigo-950/40 border border-slate-800 rounded-2xl h-72 flex flex-col items-center justify-between p-6 overflow-hidden shadow-2xl">
-                <!-- Background Effect Floating Stars -->
                 <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
 
                 <!-- Boss Warning Badge -->
@@ -129,12 +138,10 @@
 
                 <!-- Monster Container -->
                 <div id="monsterArea" class="flex flex-col items-center justify-center my-auto cursor-pointer group active:scale-95 transition transform">
-                    <!-- Monster Health Bar -->
                     <div class="w-48 bg-slate-800 h-3 rounded-full overflow-hidden border border-slate-700 mb-3 shadow-inner">
                         <div id="monsterHpBar" class="bg-gradient-to-r from-red-500 to-amber-500 h-full w-full transition-all duration-200"></div>
                     </div>
                     
-                    <!-- Monster Icon -->
                     <div id="monsterAvatar" class="text-7xl filter drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] transition-transform duration-100 group-hover:scale-110">
                         👾
                     </div>
@@ -142,16 +149,14 @@
                     <p id="monsterName" class="mt-2 text-sm font-bold text-slate-300">ゴブリン (HP: 20/20)</p>
                 </div>
 
-                <!-- Click Attack Hint -->
                 <p class="text-xs text-slate-500 animate-bounce flex items-center gap-1">
                     <span>👆</span> モンスターをタップして攻撃！
                 </p>
 
-                <!-- Floating Damage Container -->
                 <div id="damagePopArea" class="absolute inset-0 pointer-events-none flex justify-center items-center"></div>
             </div>
 
-            <!-- Skill & Auto-Attack Actions -->
+            <!-- Skill & Actions -->
             <div class="grid grid-cols-2 gap-3">
                 <button id="skillBtn" class="bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-extrabold p-4 rounded-xl shadow-lg border border-red-400/30 active:scale-95 transition disabled:opacity-50 flex items-center justify-center space-x-2">
                     <span class="text-xl">🔥</span>
@@ -164,7 +169,6 @@
             </div>
         </section>
 
-        <!-- SECTION 2: UPGRADE & SHOP -->
         <section id="secUpgrade" class="space-y-4 hidden">
             <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
                 <h2 class="text-md font-bold text-amber-400 mb-3 flex items-center gap-2">
@@ -208,13 +212,10 @@
                 <h2 class="text-md font-bold text-amber-400 mb-3 flex items-center gap-2">
                     <span>✨</span> 装備・ペットショップ
                 </h2>
-                <div class="grid grid-cols-2 gap-3" id="shopGrid">
-                    <!-- Dynamic shop items rendered via JS -->
-                </div>
+                <div class="grid grid-cols-2 gap-3" id="shopGrid"></div>
             </div>
         </section>
 
-        <!-- SECTION 3: RANKING -->
         <section id="secRanking" class="space-y-4 hidden">
             <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
                 <div class="flex justify-between items-center mb-4">
@@ -240,7 +241,6 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="bg-slate-900 border-t border-slate-800 py-3 text-center text-xs text-slate-500">
         <p>Monsters & Dungeons RPG © Powered by Firebase & GitHub Pages</p>
     </footer>
@@ -270,7 +270,7 @@
         </div>
     </div>
 
-    <!-- Custom Notification Toast -->
+    <!-- Toast Notification -->
     <div id="toast" class="fixed bottom-5 right-5 bg-amber-500 text-slate-950 font-bold px-4 py-3 rounded-xl shadow-2xl transition transform translate-y-20 opacity-0 pointer-events-none flex items-center space-x-2 z-50">
         <span>🔔</span>
         <span id="toastMsg">通知メッセージ</span>
@@ -281,9 +281,7 @@
         import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // ==========================================
-        // 1. FIREBASE CONFIGURATION
-        // ==========================================
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBNAKujoIaxkUusHa69udnYH0uDfJzGfUI",
             authDomain: "aaaa-a6b83.firebaseapp.com",
@@ -293,13 +291,11 @@
             appId: "1:154798860433:web:828131b9dddb3c31733730"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
         const provider = new GoogleAuthProvider();
 
-        // Check for redirect login result on initial load
         getRedirectResult(auth).then((result) => {
             if (result && result.user) {
                 showToast(`ようこそ、${result.user.displayName}さん！`);
@@ -308,9 +304,6 @@
             console.error("Redirect Auth Error:", error);
         });
 
-        // ==========================================
-        // 2. GAME STATE
-        // ==========================================
         let currentUser = null;
 
         let player = {
@@ -351,9 +344,6 @@
 
         let purchasedItems = [];
 
-        // ==========================================
-        // 3. AUTHENTICATION LOGIC
-        // ==========================================
         const loginBtn = document.getElementById('loginBtn');
         const logoutBtn = document.getElementById('logoutBtn');
         const userInfo = document.getElementById('userInfo');
@@ -417,9 +407,6 @@
             updateUI();
         });
 
-        // ==========================================
-        // 4. FIRESTORE DATA SYNC
-        // ==========================================
         async function loadPlayerData(uid) {
             try {
                 const userDocRef = doc(db, "artifacts", "aaaa-a6b83", "public", "data", "users", uid);
@@ -503,9 +490,6 @@
             });
         }
 
-        // ==========================================
-        // 5. GAME LOGIC ENGINE
-        // ==========================================
         function spawnMonster() {
             const isBossStage = player.stage % 5 === 0;
             const template = isBossStage 
@@ -586,9 +570,6 @@
             setTimeout(() => pop.remove(), 600);
         }
 
-        // ==========================================
-        // 6. SHOP & UPGRADES
-        // ==========================================
         function renderShop() {
             const grid = document.getElementById('shopGrid');
             grid.innerHTML = '';
@@ -668,9 +649,6 @@
             } else showToast("ゴールド不足です");
         });
 
-        // ==========================================
-        // 7. UI REFRESH & TICKERS
-        // ==========================================
         function updateUI() {
             document.getElementById('stageNum').textContent = `STAGE ${player.stage}`;
             document.getElementById('goldDisplay').innerHTML = `🪙 ${player.gold}`;
@@ -700,7 +678,7 @@
             }, 2500);
         }
 
-        // Auto Attack Loop (1 sec interval)
+        // Auto Attack Loop
         setInterval(() => {
             if (player.autoAtk > 0 && currentMonster.hp > 0) {
                 attackMonster(player.autoAtk);
@@ -731,9 +709,6 @@
             showToast("ポーションで体力を全回復しました！");
         });
 
-        // ==========================================
-        // 8. TABS LOGIC
-        // ==========================================
         const tabBattle = document.getElementById('tabBattle');
         const tabUpgrade = document.getElementById('tabUpgrade');
         const tabRanking = document.getElementById('tabRanking');
